@@ -11,17 +11,16 @@ app = Flask(__name__)
 
 
 
-@app.route('/', methods = ['GET'])
+@app.route('/dados', methods = ['GET'])
 def Dashboard():
-
     viewsGraficos = __UseCaseDadosGraficos.EnviarDadosGraficos()
-    return render_template("", viewsGraficos=viewsGraficos)
+    return render_template("Dados.html", viewsGraficos=viewsGraficos)
 
-@app.route('/cadastroOcorrencia', methods = ['GET'])
+@app.route('/cadastro', methods = ['GET'])
 def GetFormularioOcorrencia():
-    return render_template()
+    return render_template("Cadastro.html")
 
-@app.route('/cadastroOcorrencia', methods = ['POST'])
+@app.route('/cadastro', methods = ['POST'])
 def EnviarFormularioOcorrencia():
     Data = request.form['Data']
     Reino = request.form['Reino']
@@ -30,14 +29,18 @@ def EnviarFormularioOcorrencia():
     Ordem = request.form['Ordem']
     Familia = request.form['Familia']
     Genero = request.form['Genero']
-    Nome_cientifico = request.form['Nome_cientifico']
-    Cidade = request.form['Cidade']
-    Estado = request.form['Estado']
-    ocorrencia = __ocorrencia.Ocorrencia(Data,Reino,Filo,Classe,Ordem,Familia,Genero,Nome_cientifico,Cidade,Estado)
+    Nome_cientifico = request.form['NomeCientifico']
+    Localidade = request.form['Localidade']
+    Estado = Localidade.split(',')[0]
+    Cidade = Localidade.split(',')[1]
+    GBIF = request.form['GBIF']
+    ocorrencia = __ocorrencia.Ocorrencia(Data,Reino,Filo,Classe,Ordem,Familia,Genero,Nome_cientifico,Cidade,Estado, GBIF)
     responseOcorrencia = __UseCaseOcorrencia.CadastrarOcorrencia(ocorrencia)
-    return render_template('', response = responseOcorrencia)
+    return render_template('Dados.html', response = responseOcorrencia)
 
-
+@app.route('/mapaDensidade', methods = ['GET'])
+def GetMapaDensidade():
+    return render_template("Mapa.html")
 
 if __name__ == '__main__':
     app.run()
