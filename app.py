@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 
 
-@app.route('/dados', methods = ['GET'])
+@app.route('/', methods = ['GET'])
 def Dashboard():
     Cidades, Especies = __UseCaseDadosGraficos.EnviarDadosGraficos()
     return render_template("Dados.html", Cidades=Cidades, Especies=Especies)
@@ -35,17 +35,12 @@ def EnviarFormularioOcorrencia():
     Genero = request.form['Genero']
     Especie = request.form['Especie']
     Nome_cientifico = request.form['NomeCientifico']
-    Localidade = request.form['Localidade']
-    Estado = Localidade.split(',')[0]
-    Cidade = Localidade.split(',')[1]
+    Estado = request.form['Estado']
+    Cidade = request.form['CI=idade']
     GBIF = request.form['GBIF']
     ocorrencia = __ocorrencia.Ocorrencia(Data,Reino,Filo,Classe,Ordem,Familia,Genero,Especie,Nome_cientifico,Cidade,Estado, GBIF)
     responseOcorrencia = __UseCaseOcorrencia.CadastrarOcorrencia(ocorrencia)
     return render_template('Cadastro.html')
-
-@app.route('/mapaDensidade', methods = ['GET'])
-def GetMapaDensidade():
-    return render_template("Mapa.html")
 
 if __name__ == '__main__':
     app.run()

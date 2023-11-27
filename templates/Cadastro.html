@@ -9,116 +9,170 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
-  <style>
-    
-    body {
-      text-align: center;
-      color: rgb(3, 3, 3);
-    }
-
-    h1 {
-      text-align: center;
-      font-family: "Verdana", sans-serif;
-      font-size: 40px;
-      color: #ffffff;
-    }
-
-    .chart-container {
-      display: inline-block;
-      margin: 10px;
-      width: 20%;
-      color: #000;
-    }
-
-    .form-select {
-      color: black;
-    }
-
-    .box {
-      width: 1000px;
-      height: 500px;
-      background-color: rgba(0, 0, 0, 0.7);
-      margin: 20px;
-  }
-  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
-<body background="https://imgmd.net/images/v1/guia/1612928/museu-paraense-emilio-goeldi.jpg">
+<body>
+  <header>
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="https://www.gov.br/museugoeldi/pt-br">Museu Emilio Goeldi</a>
       </div>
       <ul class="nav navbar-nav">
-       <li class="active"><a href="/cadastro">Cadastro</a></li>
-        <li><a href="/dados">Dados</a></li>
-        <li><a href="/mapaDensidade">Mapa Densidade</a></li>
+          <li><a href="/">Dados</a></li>
+          <li  class="active"><a href="/cadastro">Cadastro</a></li>
       </ul>
     </div>
   </nav>
-
-<center>
+</header>
+  </header>
+  <main>
   <div class="box">
-
-    <br><br>
       <form action="/cadastro" method="post">
-      <h1>Formulário</h1>
-    <input type="text" id="nome" name="NomeCientifico" placeholder="Nome Cientifico" name="NomeCientifico">
-      <br><br>
-    <select class="form-select" aria-label="Kingdom" id="Reino" name="Reino">
-        <option selected>Reino</option>
-        {%  for reino in Reinos %}
-        <option value="{{ reino }}">{{ reino }}</option>
-        {% endfor %}
-    </select>
-    <select class="form-select" aria-label="Default select example" id="Filo" name="Filo">
-      <option selected>Filo</option>
-        {%  for filo in Filos %}
-        <option value="{{ filo }}">{{ filo }}</option>
-        {% endfor %}
-    </select>
-    <br>
-    <select class="form-select" aria-label="Default select example" id="Classe" name="Classe">
-      <option selected>Classe</option>
-        {%  for classe in Classes %}
-        <option value="{{ classe }}">{{ classe }}</option>
-        {% endfor %}
-    </select>
-    <select class="form-select" aria-label="Default select example" id="Ordem" name="Ordem">
-      <option selected>Ordem</option>
-        {%  for ordem in Ordens %}
-        <option value="{{ ordem }}">{{ ordem }}</option>
-        {% endfor %}
-    </select>
-    <br>
-    <select class="form-select" aria-label="Default select example" id="Familia" name="Familia">
-      <option selected>Família</option>
-        {%  for familia in Familias %}
-        <option value="{{ familia }}">{{ familia }}</option>
-        {% endfor %}
-    </select>
-    <select class="form-select" aria-label="Default select example" id="Genero" name="Genero">
-      <option selected>Gênero</option>
-        {%  for genero in Generos %}
-        <option value="{{ genero }}">{{ genero }}</option>
-        {% endfor %}
-    </select>
-      <select class="form-select" aria-label="Default select example" id="Especie" name="Especie">
-          <option value="" selected>Especie</option>
-          {%  for especie in Especies %}
-        <option value="{{ especie }}">{{ especie }}</option>
-        {% endfor %}
-    </select>
-    <br><br>
-    <input type="date" id="data" name="Data"> <br><br>
-    <input type="text" id="lugar" name="Localidade" placeholder="Localidade (Estado, Cidade)"><br><br>
-    <input type="text" id="GBIF" name="GBIF" placeholder="GBIF"><br><br>
-    <button type="submit" class="btn btn-primary" id="salvar">Cadastrar</button>
-    </form>
+          <h1>Formulário</h1>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Nome Cientifico</span>
+            </div>
+            <input type="text" id="nome" name="NomeCientifico" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          </div>
+       <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="">Localidade</span>
+            </div>
+            <input type="text" name="Estado" placeholder="Estado" class="form-control">
+            <input type="text" name="Cidade" placeholder="Cidade" class="form-control">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">GBIF</span>
+            </div>
+            <input type="text"  id="GBIF" name="GBIF" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div>
+          <select class="form-select custom-select" aria-label="Kingdom" id="Reino" name="Reino">
+            <option selected>Reino</option>
+            {%  for reino in Reinos %}
+            <option value="{{ reino }}">{{ reino }}</option>
+            {% endfor %}
+          </select>
+          <select class="form-select custom-select" aria-label="Default select example" id="Filo" name="Filo">
+            <option selected>Filo</option>
+              {%  for filo in Filos %}
+              <option value="{{ filo }}">{{ filo }}</option>
+              {% endfor %}
+          </select>
+        </div>
+          <div>
+          <select class="form-select custom-select" aria-label="Default select example" id="Classe" name="Classe">
+            <option selected>Classe</option>
+              {%  for classe in Classes %}
+              <option value="{{ classe }}">{{ classe }}</option>
+              {% endfor %}
+          </select>
+          <select class="form-select custom-select" aria-label="Default select example" id="Ordem" name="Ordem">
+            <option selected>Ordem</option>
+              {%  for ordem in Ordens %}
+              <option value="{{ ordem }}">{{ ordem }}</option>
+              {% endfor %}
+          </select>
+        </div>
+          <div>
+          <select class="form-select custom-select" aria-label="Default select example" id="Familia" name="Familia">
+            <option selected>Família</option>
+              {%  for familia in Familias %}
+              <option value="{{ familia }}">{{ familia }}</option>
+              {% endfor %}
+          </select>
+          <select class="form-select custom-select" aria-label="Default select example" id="Genero" name="Genero">
+            <option selected>Gênero</option>
+              {%  for genero in Generos %}
+              <option value="{{ genero }}">{{ genero }}</option>
+              {% endfor %}
+          </select>
+        </div>
+        <div>
+          <select class="form-select custom-select" aria-label="Default select example" id="Especie" name="Especie">
+                <option value="" selected>Especie</option>
+                {%  for especie in Especies %}
+              <option value="{{ especie }}">{{ especie }}</option>
+              {% endfor %}
+          </select>
+          <input type="date" id="data" name="Data">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary" id="salvar">Cadastrar</button>
+      </form>
   </div>
-
-</center>
-  
+</main>
 </body>
+<style>
+   .navbar{
+      display: flex;
+      flex-direction: row;
+    }
+    .navbar-nav{
+      display: flex;
+      flex-direction: row;
+    }
+    body {
+      text-align: center;
+      color: rgb(0, 0, 0);
+    }
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-itens: center;
+  }
 
+  h1 {
+    text-align: center;
+    font-family: "Verdana", sans-serif;
+    font-size: 40px;
+    color: #ffffff;
+  }
+
+  .chart-container {
+    display: inline-block;
+    margin: 10px;
+    width: 20%;
+    color: #000;
+  }
+
+  .form-select {
+    color: black;
+    width:100px;
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 20px;
+    border-radius: 4px;
+}
+form{
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.input-group{
+  width: 300px;
+}
+#data{
+  border: none;
+  border-radius:3px;
+  height: 24px;
+  width: 100px;
+}
+</style>
 </html>
