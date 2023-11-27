@@ -12,15 +12,10 @@ def EnviarDadosGraficos():
         connection, cursor = __Neon.GetConnection(__DatabaseStringConnect)
         TotalOcorrencias = __Neon.GetView(cursor, "total_occurrences_view")
         CidadesMaiores = __Neon.GetView(cursor, "top_cities_occurrences")
-        EspeciesMaiores = __Neon.GetView(cursor, "top_species_occurrences")
+        EspeciesMaiores = __Neon.GetView(cursor, "species_count_view")
 
         connection.close()
         __BaseReturn.SuccessDataBase()
-        return {
-            "TotalOcorrencias": TotalOcorrencias,
-            "CidadesMaiores": CidadesMaiores,
-            "EspeciesMaiores": EspeciesMaiores
-        }
-
+        return CidadesMaiores, EspeciesMaiores
     except:
         __BaseReturn.ErrorDataBase()

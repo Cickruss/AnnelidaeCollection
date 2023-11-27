@@ -45,161 +45,76 @@
   </nav>
 
   <div class="col-xs-12 text-center">
-    <h2>Taxonomia</h2>
+    <h2>Graficos</h2>
   </div>
 
-  <div class="chart-container" id="kingdom"></div>
-  <div class="chart-container" id="phylum"></div>
-  <div class="chart-container" id="classe"></div>
+  <div class="chart-container" style="height: 50vh;width: 50vw;" id="CidadesGrafico"></div>
+  <div class="chart-container" style="height: 50vh;width: 50vw;" id="EspeciesGrafico"></div>
 
-  <div class="chart-container" id="order"></div>
-  <div class="chart-container" id="family"></div>
-  <div class="chart-container" id="Genus"></div>
+  <div id="cidades" style="display: none">
+      {{ Cidades }}
+  </div>
+  <div id="especies" style="display: none">
+      {{ Especies }}
+  </div>
+
 
   <script>
-    var kingdom = bb.generate({
-      data: {
-        columns: [
-          ["Blue", 2],
-          ["orange", 4],
-          ["green", 3],
-        ],
-        type: "donut",
-        onclick: function (d, i) {
-          console.log("onclick", d, i);
-        },
-        onover: function (d, i) {
-          console.log("onover", d, i);
-        },
-        onout: function (d, i) {
-          console.log("onout", d, i);
-        },
-      },
-      donut: {
-        title: "kingdom",
-      },
-      bindto: "#kingdom",
-    });
+      var elemento = document.querySelector('#cidades');
+    var elementoText = elemento.textContent.trim();
+    textLimpo = elementoText.replace(/\(/g, '[').replace(/\)/g, ']').replace(/'/g, '\"');
 
-    var phylum = bb.generate({
+    try {
+        var arrayGrafico = JSON.parse(textLimpo);
+        console.log(arrayGrafico);
+        var graficoCidades = bb.generate({
+            title: {
+    text: "Cidades com ocorrencias"
+    },
       data: {
-        columns: [
-          ["Blue", 2],
-          ["orange", 4],
-          ["green", 3],
-        ],
-        type: "donut",
-        onclick: function (d, i) {
-          console.log("onclick", d, i);
-        },
-        onover: function (d, i) {
-          console.log("onover", d, i);
-        },
-        onout: function (d, i) {
-          console.log("onout", d, i);
-        },
+        columns:arrayGrafico,
+        type: "bar",
       },
-      donut: {
-        title: "Phylum",
-      },
-      bindto: "#phylum",
+      bindto: "#CidadesGrafico",
+            legend: {
+    show: true,
+    position: "right"
+},
     });
+    } catch (error) {
+        console.error("Erro ao fazer o parse do JSON:", error);
+    }
 
-    var classe = bb.generate({
-      data: {
-        columns: [
-          ["Red", 1],
-          ["purple", 5],
-          ["yellow", 2],
-        ],
-        type: "donut",
-        onclick: function (d, i) {
-          console.log("onclick", d, i);
-        },
-        onover: function (d, i) {
-          console.log("onover", d, i);
-        },
-        onout: function (d, i) {
-          console.log("onout", d, i);
-        },
-      },
-      donut: {
-        title: "class",
-      },
-      bindto: "#classe",
-    });
 
-    var order = bb.generate({
-      data: {
-        columns: [
-          ["Red", 1],
-          ["purple", 5],
-          ["yellow", 2],
-        ],
-        type: "donut",
-        onclick: function (d, i) {
-          console.log("onclick", d, i);
-        },
-        onover: function (d, i) {
-          console.log("onover", d, i);
-        },
-        onout: function (d, i) {
-          console.log("onout", d, i);
-        },
-      },
-      donut: {
-        title: "Order",
-      },
-      bindto: "#order",
-    });
+    var elemento = document.querySelector('#especies');
+    var elementoText = elemento.textContent.trim();
+    textLimpo = elementoText.replace(/\(/g, '[').replace(/\)/g, ']').replace(/'/g, '\"');
 
-    var family = bb.generate({
+    try {
+        var arrayGrafico = JSON.parse(textLimpo);
+        console.log(arrayGrafico);
+        var graficoCidades = bb.generate({
+            title: {
+    text: "Especies com maiores ocorrencias"
+    },
       data: {
-        columns: [
-          ["Green", 3],
-          ["yellow", 2],
-          ["red", 1],
-        ],
-        type: "donut",
-        onclick: function (d, i) {
-          console.log("onclick", d, i);
-        },
-        onover: function (d, i) {
-          console.log("onover", d, i);
-        },
-        onout: function (d, i) {
-          console.log("onout", d, i);
-        },
+        columns:arrayGrafico,
+        type: "bar",
       },
-      donut: {
-        title: "Family",
-      },
-      bindto: "#family",
+  bar: {
+    padding: 50
+  },
+      bindto: "#EspeciesGrafico",
+            legend: {
+    show: true,
+    position: "right"
+},
     });
+    } catch (error) {
+        console.error("Erro ao fazer o parse do JSON:", error);
+    }
 
-    var genus = bb.generate({
-      data: {
-        columns: [
-          ["Green", 3],
-          ["yellow", 2],
-          ["red", 1],
-        ],
-        type: "donut",
-        onclick: function (d, i) {
-          console.log("onclick", d, i);
-        },
-        onover: function (d, i) {
-          console.log("onover", d, i);
-        },
-        onout: function (d, i) {
-          console.log("onout", d, i);
-        },
-      },
-      donut: {
-        title: "Genus",
-      },
-      bindto: "#Genus",
-    });
+
   </script>
 </body>
 </html>

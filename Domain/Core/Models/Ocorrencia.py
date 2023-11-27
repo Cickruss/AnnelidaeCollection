@@ -1,5 +1,5 @@
 class Ocorrencia():
-    def __init__(self, data, reino, filo, classe, ordem, familia, genero,nome_cientifico, cidade, estado, GBIF):
+    def __init__(self, data, reino, filo, classe, ordem, familia, genero, especie, nome_cientifico, cidade, estado, GBIF):
         self.data = data
         self.reino = reino
         self.filo = filo
@@ -7,6 +7,7 @@ class Ocorrencia():
         self.ordem = ordem
         self.familia = familia
         self.genero = genero
+        self.especie = especie
         self.nome_cientifico = nome_cientifico
         self.cidade = cidade
         self.estado = estado

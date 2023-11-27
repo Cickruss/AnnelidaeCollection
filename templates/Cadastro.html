@@ -61,39 +61,58 @@
   <div class="box">
 
     <br><br>
-      <form action="/Cadastro" method="post">
+      <form action="/cadastro" method="post">
       <h1>Formulário</h1>
     <input type="text" id="nome" name="NomeCientifico" placeholder="Nome Cientifico" name="NomeCientifico">
       <br><br>
     <select class="form-select" aria-label="Kingdom" id="Reino" name="Reino">
-      <option selected>Reino</option>
+        <option selected>Reino</option>
+        {%  for reino in Reinos %}
+        <option value="{{ reino }}">{{ reino }}</option>
+        {% endfor %}
     </select>
-    <br>
     <select class="form-select" aria-label="Default select example" id="Filo" name="Filo">
       <option selected>Filo</option>
+        {%  for filo in Filos %}
+        <option value="{{ filo }}">{{ filo }}</option>
+        {% endfor %}
     </select>
     <br>
     <select class="form-select" aria-label="Default select example" id="Classe" name="Classe">
       <option selected>Classe</option>
+        {%  for classe in Classes %}
+        <option value="{{ classe }}">{{ classe }}</option>
+        {% endfor %}
     </select>
-    <br>
     <select class="form-select" aria-label="Default select example" id="Ordem" name="Ordem">
       <option selected>Ordem</option>
+        {%  for ordem in Ordens %}
+        <option value="{{ ordem }}">{{ ordem }}</option>
+        {% endfor %}
     </select>
     <br>
     <select class="form-select" aria-label="Default select example" id="Familia" name="Familia">
       <option selected>Família</option>
+        {%  for familia in Familias %}
+        <option value="{{ familia }}">{{ familia }}</option>
+        {% endfor %}
     </select>
-    <br>
     <select class="form-select" aria-label="Default select example" id="Genero" name="Genero">
       <option selected>Gênero</option>
+        {%  for genero in Generos %}
+        <option value="{{ genero }}">{{ genero }}</option>
+        {% endfor %}
     </select>
       <select class="form-select" aria-label="Default select example" id="Especie" name="Especie">
           <option value="" selected>Especie</option>
+          {%  for especie in Especies %}
+        <option value="{{ especie }}">{{ especie }}</option>
+        {% endfor %}
     </select>
     <br><br>
     <input type="date" id="data" name="Data"> <br><br>
     <input type="text" id="lugar" name="Localidade" placeholder="Localidade (Estado, Cidade)"><br><br>
+    <input type="text" id="GBIF" name="GBIF" placeholder="GBIF"><br><br>
     <button type="submit" class="btn btn-primary" id="salvar">Cadastrar</button>
     </form>
   </div>
